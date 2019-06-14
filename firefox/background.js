@@ -2,15 +2,15 @@ var app = {};
 // Modify the referer to twitter.
 app.modifyHeaders = function(details) {
   var newRef = "https://twitter.com";
-  var gotRef = false;
+  var refExists = false;
   for (var n in details.requestHeaders) {
-    gotRef = details.requestHeaders[n].name.toLowerCase() == "referer";
-    if (gotRef) {
+    refExists = details.requestHeaders[n].name.toLowerCase() == "referer";
+    if (refExists) {
       details.requestHeaders[n].value = newRef;
       break;
     }
   }
-  if (!gotRef) {
+  if (!refExists) {
     details.requestHeaders.push({ name: "Referer", value: newRef });
   }
   return { requestHeaders: details.requestHeaders };
